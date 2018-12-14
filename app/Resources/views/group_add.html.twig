@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <div style="width: 30%; margin-left: auto; margin-right: auto;" class="p-3 mx-auto border-danger rounded">
+        <h1 class="text-center">Prideti grupe</h1>
+        {% if error %}
+            <div class="alert alert-danger text-left">
+                <ul class="list-unstyled">
+                    {% for message in error_msgs %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form method="post" action="/group/add">
+            <div class="form-group">
+                <label for="name">Pavadinimas</label>
+                <input class="form-control" type="text" id="name" name="name" value="{{ last_name }}" />
+            </div>
+
+            <button type="submit" class="btn btn-secondary">Prideti</button>
+        </form>
+    </div>
+{% endblock %}

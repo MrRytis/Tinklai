@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="my-4">Sukurti </h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="/modul/add" class="list-group-item">Sukurti moduli</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if modul %}
+            <div class="col-lg-9">
+                <h2>Moduliai</h2>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Nr</th>
+                        <th>Pavadinimas</th>
+                        <th>Kodas</th>
+                        <th>Kreditai</th>
+                    </tr>
+                    {% for m in modul %}
+                        <tr>
+                            <td>#{{  m.id }}</td>
+                            <td>{{ m.name }}</td>
+                            <td>{{ m.code }}</td>
+                            <td>{{ m.credits }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <h2>Nėra moduliu</h2>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <div style="width: 30%; margin-left: auto; margin-right: auto;" class="p-3 mx-auto border-danger rounded">
+        <h1 class="text-center">Prideti moduli</h1>
+        {% if error %}
+            <div class="alert alert-danger text-left">
+                <ul class="list-unstyled">
+                    {% for message in error_msgs %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form method="post" action="/modul/add">
+            <div class="form-group">
+                <label for="name">Pavadinimas</label>
+                <input class="form-control" type="text" id="name" name="name" value="{{ last_name }}" />
+            </div>
+            <div class="form-group">
+                <label for="name">Kodas</label>
+                <input class="form-control" type="text" id="code" name="code" value="{{ last_code }}" />
+            </div>
+            <div class="form-group">
+                <label for="email">Kreditai</label>
+                <input class="form-control" type="number" name="credits" id="credits" value="{{ last_credits }}" />
+            </div>
+            <button type="submit" class="btn btn-secondary">Prideti</button>
+        </form>
+    </div>
+{% endblock %}

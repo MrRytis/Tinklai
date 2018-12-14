@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <div style="width: 30%; margin-left: auto; margin-right: auto;" class="p-3 mx-auto border-danger rounded">
+        <h1 class="text-center">Studentas</h1>
+        {% if error %}
+            <div class="alert alert-danger text-left">
+                <ul class="list-unstyled">
+                    {% for message in error_msgs %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form method="post" action="/register/student">
+            <div class="form-group">
+                <label for="name">Vardas</label>
+                <input class="form-control" type="text" id="name" name="name" value="{{ last_name }}" />
+            </div>
+            <div class="form-group">
+                <label for="name">Pavardė</label>
+                <input class="form-control" type="text" id="surname" name="surname" value="{{ last_surname }}" />
+            </div>
+            <div class="form-group">
+                <label for="email">El. paštas</label>
+                <input class="form-control" type="email" name="email" id="email" value="{{ last_email }}" />
+            </div>
+            <div class="form-group">
+                <label for="password">Slatažodis</label>
+                <input class="form-control" type="password" name="password" id="password" />
+            </div>
+            <div class="form-group">
+                <label for="password-repeat">Pakartoti slaptažodis</label>
+                <input class="form-control" type="password" name="password-repeat" id="password-repeat" />
+            </div>
+            <div class="form-group">
+                <label for="user-type">Grupe</label>
+                <select class="form-control" name="group" id="group">
+                    {% for g in groups %}
+                        <option>{{ g.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="user-type">Modulis</label>
+                <select class="form-control" name="modul" id="modul">
+                    {% for m in moduls %}
+                        <option>{{ m.code }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-secondary">Registruotis</button>
+        </form>
+    </div>
+{% endblock %}

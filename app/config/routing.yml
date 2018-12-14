@@ -1,0 +1,19 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+welcome:
+    path: /
+    defaults: {_controller: AppBundle:List:show}
+
+group-list:
+    path: /group/list
+    defaults: {_controller: AppBundle:Group:groupList}
+
+modul-list:
+    path: /modul/list
+    defaults: {_controller: AppBundle:Modul:modulList}
+
+modul-add:
+    path: /modul/add
+    defaults: {_controller: AppBundle:Modul:addModule}
