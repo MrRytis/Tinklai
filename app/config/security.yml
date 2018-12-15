@@ -32,5 +32,11 @@ security:
 
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
-#    access_control:
-#    - { path: /group, roles: [ROLE_KLIENTAS, ROLE_DARBUOTOJAS, ROLE_ADMINISTRATORIUS] }
+    access_control:
+    - { path: /add_file, roles: [ROLE_ADMIN] }
+    - { path: /register, roles: [ROLE_ADMIN] }
+    - { path: /group/list, roles: [ROLE_ADMIN] }
+    - { path: /modul/list, roles: [ROLE_ADMIN] }
+    - { path: /message/list, roles: [ROLE_ADMIN] }
+    - { path: /dept/list, roles: [ROLE_ADMIN] }
+#    - { path: /, roles: [ROLE_ADMIN, ROLE_STUDENT, ROLE_LECTOR] }

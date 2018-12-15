@@ -22,16 +22,31 @@
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="/">Pagrindinis</a>
+                        <a class="navbar-brand" href="/">Sistema</a>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li><a href="/add_file">Prideti nauja faila</a></li>
-                        <li><a  href="/register">Registruoti nauja vartotoja</a></li>
-                        <li><a href="/group/list">Grupes</a></li>
-                        <li><a href="/modul/list">Moduliai</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="/add_file">Prideti nauja faila</a></li>
+                            <li><a  href="/register">Registruoti nauja vartotoja</a></li>
+                            <li><a href="/group/list">Grupes</a></li>
+                            <li><a href="/modul/list">Moduliai</a></li>
+                            <li><a href="/message/list">Zinutes</a></li>
+                            <li><a href="/dept/list">Skolos</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_STUDENT') %}
+                            <li><a href="/dept">Skolos</a></li>
+                            <li><a href="/work">Atsiskaitymai</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_LECTOR') %}
+                            <li><a href="/group/list">Studentu sarašas</a></li>
+                        {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/logout">Atsijungti</a></li>
+                        {% if is_granted('ROLE_LECTOR') or is_granted('ROLE_STUDENT') or is_granted('ROLE_ADMIN')%}
+                            <li><a href="/logout">Atsijungti</a></li>
+                        {% else %}
+                            <li><a href="/login">Prisijungti</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </nav>

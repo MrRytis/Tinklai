@@ -38,6 +38,12 @@ class Payment
     protected $paid;
 
     /**
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    protected $confirmed;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -106,6 +112,24 @@ class Payment
     public function setPaid($paid)
     {
         $this->paid = $paid;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfirmed()
+    {
+        return $this->confirmed;
+    }
+
+    /**
+     * @param bool $confirmed
+     * @return Payment
+     */
+    public function setConfirmed($confirmed)
+    {
+        $this->confirmed = $confirmed;
         return $this;
     }
 }

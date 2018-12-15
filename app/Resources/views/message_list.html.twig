@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% if message %}
+            <div class="col-lg-9">
+                <h2>Žinutės</h2>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Nr</th>
+                        <th>Studentas</th>
+                        <th>Tekstas</th>
+                    </tr>
+                    {% for m in message %}
+                        <tr>
+                            <td>#{{  m.id }}</td>
+                            <td>{{ m.FkStudentid.FkUserid.name }}</td>
+                            <td>{{ m.text }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <h2>Nėra žinučiu</h2>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

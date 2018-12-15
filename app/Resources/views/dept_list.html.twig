@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% if dept %}
+            <div class="col-lg-9">
+                <h2>Skolos</h2>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Nr</th>
+                        <th>Studentas</th>
+                        <th>Apmokėta</th>
+                        <th>Patvirtinta</th>
+                        <th>Patvirtinti apmokėjima</th>
+                    </tr>
+                    {% for d in dept %}
+                        <tr>
+                            <td>#{{  d.id }}</td>
+                            <td>{{ d.FkStudentid.FkUserid.name }}</td>
+                            {% if d.FkPaymentid.paid == true %}
+                                <td>Taip</td>
+                            {% else %}
+                                <td>Ne</td>
+                            {% endif %}
+                            {% if d.FkPaymentid.confirmed == true %}
+                                <td>Taip</td>
+                            {% else %}
+                                <td>Ne</td>
+                            {% endif %}
+                            {% if d.FkPaymentid.confirmed == false %}
+                                <td><a  href="{{ path('dept-edit', {'id': d.id }) }}">Patvirtinti apmokejima</a></td>
+                            {% else %}
+                                <td>-</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <h2>Nėra skolų</h2>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

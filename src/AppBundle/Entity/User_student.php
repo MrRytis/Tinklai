@@ -22,7 +22,7 @@ class User_student
     /**
      * @var \AppBundle\Entity\User
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", cascade={"persist"}, fetch="EAGER")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="fk_Userid", referencedColumnName="id")
      * })
@@ -32,7 +32,7 @@ class User_student
     /**
      * @var \AppBundle\Entity\Modul
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Modul", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Modul", cascade={"persist"}, fetch="EAGER")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="fk_Modulid", referencedColumnName="id")
      * })

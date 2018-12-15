@@ -39,12 +39,42 @@ class Debt
     /**
      * @var \AppBundle\Entity\User_student
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User_student", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User_student", cascade={"persist"}, fetch="EAGER")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="fk_Studentid", referencedColumnName="id")
      * })
      */
     protected $fk_Studentid;
+
+    /**
+     * @var \AppBundle\Entity\User_lector
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User_lector", cascade={"persist"}, fetch="EAGER")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fk_Lectorid", referencedColumnName="id")
+     * })
+     */
+    protected $fk_Lectorid;
+
+    /**
+     * @var \AppBundle\Entity\Payment
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Payment", cascade={"persist"}, fetch="EAGER")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fk_Paymentid", referencedColumnName="id")
+     * })
+     */
+    protected $fk_Paymentid;
+
+    /**
+     * @var \AppBundle\Entity\Modul
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Modul", cascade={"persist"}, fetch="EAGER")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fk_Modulid", referencedColumnName="id")
+     * })
+     */
+    protected $fk_Modulid;
 
     /**
      * @return mixed
@@ -133,6 +163,60 @@ class Debt
     public function setFkStudentid($fk_Studentid)
     {
         $this->fk_Studentid = $fk_Studentid;
+        return $this;
+    }
+
+    /**
+     * @return Payment
+     */
+    public function getFkPaymentid()
+    {
+        return $this->fk_Paymentid;
+    }
+
+    /**
+     * @param Payment $fk_Paymentid
+     * @return Debt
+     */
+    public function setFkPaymentid($fk_Paymentid)
+    {
+        $this->fk_Paymentid = $fk_Paymentid;
+        return $this;
+    }
+
+    /**
+     * @return Modul
+     */
+    public function getFkModulid()
+    {
+        return $this->fk_Modulid;
+    }
+
+    /**
+     * @param Modul $fk_Modulid
+     * @return Debt
+     */
+    public function setFkModulid($fk_Modulid)
+    {
+        $this->fk_Modulid = $fk_Modulid;
+        return $this;
+    }
+
+    /**
+     * @return User_lector
+     */
+    public function getFkLectorid()
+    {
+        return $this->fk_Lectorid;
+    }
+
+    /**
+     * @param User_lector $fk_Lectorid
+     * @return Debt
+     */
+    public function setFkLectorid($fk_Lectorid)
+    {
+        $this->fk_Lectorid = $fk_Lectorid;
         return $this;
     }
 }

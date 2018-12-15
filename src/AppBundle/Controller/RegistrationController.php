@@ -84,7 +84,7 @@ class RegistrationController extends Controller
                 $encoder = $this->get('security.password_encoder');
                 $pass = $encoder->encodePassword($user, $password);
 
-                $user->setName($lastName);
+                $user->setName($lastName. ' ' . $lastSurname);
                 $user->setEmail($lastEmail);
                 $user->setPassword($pass);
                 $user->setRole('ROLE_STUDENT');
@@ -187,7 +187,7 @@ class RegistrationController extends Controller
                 $encoder = $this->get('security.password_encoder');
                 $pass = $encoder->encodePassword($user, $password);
 
-                $user->setName($lastName);
+                $user->setName($lastName . ' ' . $lastSurname);
                 $user->setEmail($lastEmail);
                 $user->setPassword($pass);
                 $user->setRole('ROLE_LECTOR');

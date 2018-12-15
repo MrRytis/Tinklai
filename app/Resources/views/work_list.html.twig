@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% if dept %}
+            <div class="col-lg-9">
+                <h2>Atsiskaitymai</h2>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Nr</th>
+                        <th>Modulis</th>
+                        <th>Data Nuo</th>
+                        <th>Data Iki</th>
+                        <th>Dėstitojas</th>
+                    </tr>
+                    {% for d in dept %}
+                        <tr>
+                            <td>#{{  d.id }}</td>
+                            <td>{{ d.FkModulid.code }}</td>
+                            <td>{{ d.dateFrom|date('Y-m-d') }}</td>
+                            <td>{{ d.dateTo|date('Y-m-d') }}</td>
+                            <td>{{ d.FkLectorid.FkUserid.name }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <h2>Nėra skolų</h2>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
