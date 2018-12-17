@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% if students %}
+            <div class="col-lg-9">
+                <h2>Studentai</h2>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Nr</th>
+                        <th>Studento vardas</th>
+                        <th>Grupe</th>
+                    </tr>
+                    {% for s in students %}
+                        <tr>
+                            <td>#{{  s.id }}</td>
+                            <td>{{ s.FkUserid.name }}</td>
+                            <td>{{ s.FkModulsid.code }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <h2>Nėra studentu</h2>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

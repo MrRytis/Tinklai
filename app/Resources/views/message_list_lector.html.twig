@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="my-4">Valdymas</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="/message/lector/create" class="list-group-item">Sukurti nauja zinute</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if message %}
+            <div class="col-lg-9">
+                <h2>Žinutės</h2>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Nr</th>
+                        <th>Studentas</th>
+                        <th>Tekstas</th>
+                    </tr>
+                    {% for m in message %}
+                        <tr>
+                            <td>#{{  m.id }}</td>
+                            <td>{{ m.student }}</td>
+                            <td>{{ m.text }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <h2>Nėra žinučiu</h2>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

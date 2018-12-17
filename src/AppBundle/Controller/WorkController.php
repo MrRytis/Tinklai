@@ -33,41 +33,4 @@ class WorkController extends Controller
             'dept' => $dept,
         ]);
     }
-
-    /**
-     * @param $id
-     *
-     * @Route("/dept/edit/{id}", requirements={"id" = "\d+"}, name="dept-edit")
-     * @return null
-     *
-     */
-    public function editDeptAction($id)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $debt = $entityManager->getRepository(Debt::class)->find($id);
-
-        $payment = $debt->getFkPaymentid();
-        $payment->setConfirmed(1);
-        $entityManager->flush();
-
-        return $this->redirect("/dept/list");
-    }
-
-    /**
-     * @Route("/dept/list", name="dept-list")
-     */
-    public function deptListAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $dept = $em->createQuery(
-            'SELECT d
-            FROM AppBundle:Debt d'
-        )->getResult();
-
-//        dump($dept);
-//        die();
-        return $this->render('dept_list.html.twig', [
-            'dept' => $dept,
-        ]);
-    }
 }

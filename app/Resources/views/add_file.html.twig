@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h3>Prideti faila</h3>
+    {{ form_start(form) }}
+        {{ form_row(form.file) }}
+    {{ form_end(form) }}
+{% endblock %}

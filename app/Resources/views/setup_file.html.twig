@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div style="width: 30%; margin-left: auto; margin-right: auto;" class="p-3 mx-auto border-danger rounded">
+        <h1 class="text-center">Isduoti skolas</h1>
+        {% if error %}
+            <div class="alert alert-danger text-left">
+                <ul class="list-unstyled">
+                    {% for message in error_msgs %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form method="post" action="/file/setup">
+            <div class="form-group">
+                <label for="name">Kaina už valanda</label>
+                <input class="form-control" type="number" id="cost" name="cost" value="{{ last_cost }}" />
+            </div>
+            {% for g in groups %}
+                <div class="form-group">
+                    <label for="group">{{ g.name }}</label>
+                </div>
+                <div class="form-group">
+                    <label for="name">Data nuo</label>
+                    <input class="form-control" type="date" id="dateFrom" name="dateFrom"/>
+                </div>
+                <div class="form-group">
+                    <label for="name">Data iki</label>
+                    <input class="form-control" type="date" id="dateTo" name="dateTo"/>
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-secondary">Pridėti</button>
+        </form>
+    </div>
+{% endblock %}

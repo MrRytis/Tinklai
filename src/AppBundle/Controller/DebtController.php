@@ -64,9 +64,33 @@ class DebtController extends Controller
             FROM AppBundle:Debt d'
         )->getResult();
 
-//        dump($dept);
-//        die();
         return $this->render('dept_list.html.twig', [
+            'dept' => $dept,
+        ]);
+    }
+
+    /**
+     * @Route("/dept/lector", name="dept-lector")
+     */
+    public function deptListLectorAction()
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $lector = $em->createQuery(
+            'SELECT l
+            FROM AppBundle:User_lector l
+            WHERE l.fk_Userid = :user'
+        )->setParameter('user', $user->getId())->getOneOrNullResult();
+
+        $modul = $lector->getFkModulsid()->getId();
+
+        $dept = $em->createQuery(
+            'SELECT d
+            FROM AppBundle:Debt d
+            WHERE d.fk_Modulid = :modul'
+        )->setParameter('modul', $modul)->getResult();
+
+        return $this->render('dept_list_lector.html.twig', [
             'dept' => $dept,
         ]);
     }

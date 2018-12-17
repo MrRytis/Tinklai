@@ -36,9 +36,12 @@
                         {% if is_granted('ROLE_STUDENT') %}
                             <li><a href="/dept">Skolos</a></li>
                             <li><a href="/work">Atsiskaitymai</a></li>
+                            <li><a href="/message/student/list">Zinutes</a></li>
                         {% endif %}
                         {% if is_granted('ROLE_LECTOR') %}
-                            <li><a href="/group/list">Studentu sarašas</a></li>
+                            <li><a href="/student/list">Studentu sarašas</a></li>
+                            <li><a href="/dept/lector">Studentu skolos</a></li>
+                            <li><a href="/message/lector/list">Zinutes</a></li>
                         {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

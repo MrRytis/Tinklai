@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <div style="width: 30%; margin-left: auto; margin-right: auto;" class="p-3 mx-auto border-danger rounded">
+        <h1 class="text-center">Zinute</h1>
+        {% if error %}
+            <div class="alert alert-danger text-left">
+                <ul class="list-unstyled">
+                    {% for message in error_msgs %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form method="post" action="/message/student/create">
+            <div class="form-group">
+                <label for="user-type">Destitojas</label>
+                <select class="form-control" name="lector" id="lector">
+                    {% for l in lector %}
+                        <option>{{ l.FkUserid.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Tekstas</label>
+                <div>
+                    <textarea id="text" name="text" rows="4" cols="50"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-secondary">Siusti</button>
+        </form>
+    </div>
+{% endblock %}
