@@ -22,7 +22,7 @@ class File
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
-     * @Assert\File(mimeTypes={ "text/csv" })
+     * @Assert\File(mimeTypes={ "text/plain" })
      */
     protected $file;
 

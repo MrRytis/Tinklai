@@ -85,42 +85,44 @@ class AddFileController extends Controller
 
             if (!$error) {
 
-//                $payment = new Payment();
-//                $payment->setAmount($lastCost);
-//                $payment->setConfirmed(0);
-//                $payment->setPaid(0);
-//                $payment->setDate(new \DateTime('now'));
-//
-//                $entityManager = $this->getDoctrine()->getManager();
-//                $entityManager->persist($payment);
-//                $entityManager->flush();
 
 
-                $finder = new Finder();
-                $finder->files()->in('%kernel.project_dir%/web/Files');
-//                $reader = Reader::createFromPath('%kernel.project_dir%/web/Files/Failas.csv');
-//                $results = $reader->fetchAssoc();
 
-                foreach ($finder as $files)
+                $path = $this->getParameter('file_directory').'/Failas.txt';
+                $file = fopen($path, 'r');
+                while (!feof($file))
                 {
-                    dump($files);
-                    die();
+                    $content = fgets($file);
+                    $carray = explode(',', $content);
+                    list($name, $modul) = $carray;
+
+                    $payment = new Payment();
+                    $payment->setAmount($lastCost);
+                    $payment->setConfirmed(0);
+                    $payment->setPaid(0);
+                    $payment->setDate(new \DateTime('now'));
+
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($payment);
+                    $entityManager->flush();
+
                     $user = $entityManager->createQuery(
                         'SELECT u
                         FROM AppBundle:User u
                         WHERE u.name = :name'
-                    )->setParameter('name', $row['vardas'])->getOneOrNullResult();
+                    )->setParameter('name', $name)->getOneOrNullResult();
                     $student = $entityManager->createQuery(
                         'SELECT s
                         FROM AppBundle:User_student s
                         WHERE s.fk_Userid = :user'
-                    )->setParameter('name', $user->getId())->getOneOrNullResult();
+                    )->setParameter('user', $user->getId())->getOneOrNullResult();
 
                     $modul = $entityManager->createQuery(
                         'SELECT m
                         FROM AppBundle:Modul m
                         WHERE m.code = :modul'
-                    )->setParameter('modul', $row['modulis'])->getOneOrNullResult();
+                    )->setParameter('modul', $modul)->getOneOrNullResult();
+                    dump($modul->getId());
 
                     $lector = $entityManager->createQuery(
                         'SELECT l
@@ -128,11 +130,14 @@ class AddFileController extends Controller
                         WHERE l.fkModulsid = :modul'
                     )->setParameter('modul', $modul->getId())->getOneOrNullResult();
 
+
                     $dept = new Debt();
 
                     $dept->setAmount($lastCost);
-                    $dept->setDateFrom($dateFrom);
-                    $dept->setDateTo($dateTo);
+                    $date = date_create($dateFrom);
+                    $dept->setDateFrom($date);
+                    $date = date_create($dateTo);
+                    $dept->setDateTo($date);
                     $dept->setFkPaymentid($payment);
                     $dept->setFkLectorid($lector);
                     $dept->setFkModulid($modul);
